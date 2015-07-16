@@ -1,6 +1,9 @@
-## These two functions create a cached square "matrix" object (makeCacheMatrix) and computes then caches its inverse for faster retrieval (cacheSolve).
+## These two functions create a cached square "matrix" object (makeCacheMatrix) and computes then caches
+## its inverse for faster retrieval (cacheSolve).
 
-## makeCacheMatrix: This function creates a cached square "matrix" object with a set(), get(), setSolve(), and getSolve() internal functions. Those internal functions can be accessed using the name you gave the matrix with $ and the name of the function, e.g. mat$get(). 
+## makeCacheMatrix: This function creates a cached square "matrix" object with a set(), get(), setSolve(),
+## and getSolve() internal functions. Those internal functions can be accessed using the name you gave
+## the matrix with $ and the name of the function, e.g. mat$get(). 
 
 makeCacheMatrix <- function(x = matrix()) {
 
@@ -25,9 +28,11 @@ makeCacheMatrix <- function(x = matrix()) {
             
             # Returning an ERROR message with ADVICE if square matrix cannot be created
             } else {
-                  addElements = length(y) - ((as.integer(rc))^2)
-                  subtractElements = ((as.integer(rc) + 1)^2) - length(y)
-                  message("Square matrix cannot be created with ", length(y), " elements. Please add ", addElements, " or subtract ", subtractElements, " elements from this matrix or provide data that can be resolved as a square matrix.")
+                  addElements = ((as.integer(rc) + 1)^2) - length(y)
+                  subtractElements = length(y) - ((as.integer(rc))^2)
+                  message("Square matrix cannot be created with ", length(y), " elements. Please add ",
+                        addElements, " or subtract ", subtractElements, 
+                        " elements from this matrix or provide data that can be resolved as a square matrix.")
                   
             }
       }
@@ -41,7 +46,11 @@ makeCacheMatrix <- function(x = matrix()) {
 
 }
 
-## cacheSolve: This function retrieves or computes the inverse of the matrix returned by makeCacheMatrix above. The inverse is retrieved from cache if it has already been calculated for an unchanged matrix; otherwise, if the matrix has changed or has not yet been calculated, the function will first compute the inverse and set it to cache. Calling the function can be done with cacheSolve(matrixName). matrixName is the name you called the matrix when using makeCacheMatrix.
+## cacheSolve: This function retrieves or computes the inverse of the matrix returned by makeCacheMatrix
+## above. The inverse is retrieved from cache if it has already been calculated for an unchanged matrix;
+## otherwise, if the matrix has changed or has not yet been calculated, the function will first compute
+## the inverse and set it to cache. Calling the function can be done with cacheSolve(matrixName).
+## matrixName is the name you called the matrix when using makeCacheMatrix.
 
 cacheSolve <- function(x) {
 
