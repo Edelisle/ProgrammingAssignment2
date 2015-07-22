@@ -32,11 +32,9 @@ makeCacheMatrix <- function(x = matrix()) {
                   
             }
       }
-      
-      # To create the matrix with values that are passed with the function
-      if ((length(x) != 0)) {
-            set(x)
-      }      
+
+      # Creating matrix first time
+      set(x)
       
       get <- function() x
       setSolve <- function(sol) s <<- solve(x)
