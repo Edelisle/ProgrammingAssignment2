@@ -6,13 +6,9 @@
 ## the matrix with $ and the name of the function, e.g. mat$get(). 
 
 makeCacheMatrix <- function(x = matrix()) {
-
+      
       ## Nulling any values of "solve" variable when creating a new matrix
       s <- NULL
-      
-      # To create the matrix with values that are passed with the function
-      rc = sqrt(length(x))
-      x = matrix(x, rc, rc)
       
       set <- function(y) {
             
@@ -21,21 +17,26 @@ makeCacheMatrix <- function(x = matrix()) {
             
             ## Testing ability to create a square matrix
             if ((rc %% 1) == 0) {
-            
-            ## Creating the square matrix and caching it
-            x <<- matrix(data=y, nrow=rc, ncol=rc)
-            s <<- NULL
-            
-            # Returning an ERROR message with ADVICE if square matrix cannot be created
+                  
+                  ## Creating the square matrix and caching it
+                  x <<- matrix(data=y, nrow=rc, ncol=rc)
+                  s <<- NULL
+                  
+                  # ERROR message with ADVICE if square matrix cannot be created
             } else {
                   addElements = ((as.integer(rc) + 1)^2) - length(y)
                   subtractElements = length(y) - ((as.integer(rc))^2)
                   message("Square matrix cannot be created with ", length(y), " elements. Please add ",
-                        addElements, " or subtract ", subtractElements, 
-                        " elements from this matrix or provide data that can be resolved as a square matrix.")
+                          addElements, " or subtract ", subtractElements, 
+                          " elements from this matrix or provide data that can be resolved as a square matrix.")
                   
             }
       }
+      
+      # To create the matrix with values that are passed with the function
+      if ((length(x) != 0)) {
+            set(x)
+      }      
       
       get <- function() x
       setSolve <- function(sol) s <<- solve(x)
@@ -43,7 +44,7 @@ makeCacheMatrix <- function(x = matrix()) {
       list(set = set, get = get,
            setSolve = setSolve,
            getSolve = getSolve)
-
+      
 }
 
 ## cacheSolve: This function retrieves or computes the inverse of the matrix returned by makeCacheMatrix
@@ -53,7 +54,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ## matrixName is the name you called the matrix when using makeCacheMatrix.
 
 cacheSolve <- function(x) {
-
+      
       s <- x$getSolve()
       if(!is.null(s)) {
             message("getting cached data")
